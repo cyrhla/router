@@ -1,0 +1,29 @@
+{
+    "name": "@cyrhla/router",
+    "version": "0.0.1",
+    "description": "The \"router\" converts the URL path to run the appropriate controller and generates the URL.",
+    "keywords": [ "routing", "route", "url", "path" ],
+    "homepage": "http://www.cyrhla.com",
+    "license": "MIT",
+    "author": {
+        "name": "Krystian Pietruszka",
+        "email": "kpietru@cyrhla.com"
+    },
+    "contributors": [
+        "Community (http://github.com/cyrhla/router/graphs/contributors)"
+    ],
+    "bugs": {
+        "url": "http://github.com/cyrhla/router/issues"
+    },
+    "engines": {
+        "node": ">= 7.2.1",
+        "npm": ">= 3.10.10"
+    },
+    "scripts": {
+        "test": "node scripts/test.js"
+    },
+    "dependencies": {
+        "@cyrhla/tester": "cyrhla/tester"
+    }
+}
+
