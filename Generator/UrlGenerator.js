@@ -21,12 +21,12 @@ module.exports = class UrlGenerator
      *
      * @param string      requestDomain
      * @param string      requestUrl
-     * @param null|string scheme
-     * @param boolean     www
-     * @param boolean     absoluteUrl
-     * @param boolean     nickSubdomain
-     * @param null|string indexDev
-     * @param boolean     lastShlash
+     * @param null|string scheme        Default null
+     * @param boolean     www           Default true
+     * @param boolean     absoluteUrl   Default true
+     * @param boolean     nickSubdomain Default true
+     * @param null|string indexDev      Default null
+     * @param boolean     lastShlash    Default false
      */
     constructor(
         requestDomain,
