@@ -56,12 +56,16 @@ Simple example*:
     var urlGenerator = new UrlGenerator(requestDomain, requestUrl)
     var router       = new Router(matcher, urlGenerator)
 
-Initialization of the class:
+Initialization of the controller:
 
-    var initialize = router.getRoute().getInitialize()
     // @some/module/BlogController
-    var controller = require(initialize)
-    // ...
+    var controller = router.getRoute().getController()
+
+    // blogAction
+    var action     = router.getRoute().getAction()
+
+    controller = new (require(controller))()
+    controller[action].apply(controller[action], {})
 
 Generating URLs*:
 
