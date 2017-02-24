@@ -70,10 +70,10 @@ Initialization of the controller*:
 Generating URLs*:
 
     router.getUrl()
-    // returns http://www.example.com/blog?foo=bar
+    // http://www.example.com/blog?foo=bar
 
     router.getUrl({ controller: 'someController', action: 'someAction', '?': 'a=b', '#': 'top' })
-    // returns /someController/someAction?a=b#top
+    // /someController/someAction?a=b#top
 
 API
 ---
