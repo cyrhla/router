@@ -51,7 +51,7 @@ Simple example*:
         }
     }
 
-    var routes       = new Routes(rawRoutes)
+    var routes       = new Routes().add(rawRoutes)
     var matcher      = new Matcher(routes, method, requestUrl)
     var urlGenerator = new UrlGenerator(requestDomain, requestUrl)
     var router       = new Router(matcher, urlGenerator)
