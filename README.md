@@ -62,7 +62,7 @@ Initialization of the controller:
     var controller = router.getRoute().getController()
 
     // blogAction
-    var action     = router.getRoute().getAction()
+    var action = router.getRoute().getAction()
 
     controller = new (require(controller))()
     controller[action].apply(controller[action], {})
@@ -70,7 +70,7 @@ Initialization of the controller:
 Generating URLs*:
 
     router.getUrl()
-    // returns http://www.example.com/some?foo=bar
+    // returns http://www.example.com/blog?foo=bar
 
     router.getUrl({ controller: 'someController', action: 'someAction', '?': 'a=b' })
     // returns /someController/someAction?a=b
