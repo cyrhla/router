@@ -17,8 +17,8 @@ router
 - Download: <http://github.com/cyrhla/router/releases>
 - Homepage: <http://www.cyrhla.com>
 
-The "router" converts the URL path to run the appropriate controller and generates the URL.
-___________________________________________________________________________________________
+The "router" converts the URL path to run the appropriate controller and generates the URLs.
+____________________________________________________________________________________________
 
 Install
 -------
@@ -30,8 +30,9 @@ Usage
 
 Simple example*:
 
-    var requestUrl = 'http://www.example.com/some?foo=bar'
+    var requestUrl    = 'http://www.example.com/some?foo=bar'
     var requestDomain = 'example.com'
+    var method        = 'GET'
 
     var rawRoutes = {
         home: {
@@ -51,12 +52,17 @@ Simple example*:
     }
 
     var routes       = new Routes(rawRoutes)
-    var matcher      = new Matcher(routes, 'GET', requestUrl)
+    var matcher      = new Matcher(routes, method, requestUrl)
     var urlGenerator = new UrlGenerator(requestDomain, requestUrl)
     var router       = new Router(matcher, urlGenerator)
 
+Initialization of the class:
+
     var initialize = router.getRoute().getInitialize()
-    require(initialize)
+    var controller = require(initialize)
+    // ...
+
+Generating URLs*:
 
     router.getUrl()
     // returns http://www.example.com/some?foo=bar
