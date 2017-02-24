@@ -13,7 +13,7 @@ const UrlGenerator = require('@cyrhla/router/Generator/UrlGenerator')
 
 /**
  * The Router converts the URL path to run the appropriate controller
- * and generates the URL.
+ * and generates the URLs.
  *
  * @author Krystian Pietruszka <kpietru@cyrhla.com>
  */
