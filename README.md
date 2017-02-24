@@ -58,11 +58,11 @@ Simple example*:
 
 Initialization of the controller:
 
-    // @some/module/BlogController
     var controller = router.getRoute().getController()
+    // @some/module/BlogController
 
-    // blogAction
     var action = router.getRoute().getAction()
+    // blogAction
 
     controller = new (require(controller))()
     controller[action].apply(controller[action], {})
@@ -72,8 +72,8 @@ Generating URLs*:
     router.getUrl()
     // returns http://www.example.com/blog?foo=bar
 
-    router.getUrl({ controller: 'someController', action: 'someAction', '?': 'a=b' })
-    // returns /someController/someAction?a=b
+    router.getUrl({ controller: 'someController', action: 'someAction', '?': 'a=b', '#': 'top' })
+    // returns /someController/someAction?a=b#top
 
 API
 ---
