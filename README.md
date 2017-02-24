@@ -30,7 +30,7 @@ Usage
 
 Simple example*:
 
-    var requestUrl    = 'http://www.example.com/some?foo=bar'
+    var requestUrl    = 'http://www.example.com/blog?foo=bar'
     var requestDomain = 'example.com'
     var method        = 'GET'
 
@@ -40,14 +40,14 @@ Simple example*:
                 '/',
                 '/:lang({lang})'
             ],
-            initialize: '@some/module/HomeController::someAction'
+            initialize: '@some/module/HomeController::homeAction'
         },
         blog: {
             routes: [
                 '/:controller(blog)',
                 '/:lang({lang})/:controller(blog)'
             ],
-            initialize: '@some/module/BlogController::someAction'
+            initialize: '@some/module/BlogController::indexAction'
         }
     }
 
@@ -59,6 +59,7 @@ Simple example*:
 Initialization of the class:
 
     var initialize = router.getRoute().getInitialize()
+    // @some/module/BlogController
     var controller = require(initialize)
     // ...
 
