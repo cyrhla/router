@@ -62,7 +62,7 @@ Initialization of the controller*:
     // @some/module/BlogController
 
     var action = router.getRoute().getAction()
-    // blogAction
+    // indexAction
 
     controller = new (require(controller))()
     controller[action].apply(controller[action], {})
