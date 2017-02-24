@@ -1,7 +1,7 @@
 {
     "name": "@cyrhla/router",
     "version": "0.0.1",
-    "description": "The \"router\" converts the URL path to run the appropriate controller and generates the URL.",
+    "description": "The \"router\" converts the URL path to run the appropriate controller and generates the URLs.",
     "keywords": [ "routing", "route", "url", "path" ],
     "homepage": "http://www.cyrhla.com",
     "license": "MIT",
