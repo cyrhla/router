@@ -56,7 +56,7 @@ Simple example*:
     var urlGenerator = new UrlGenerator(requestDomain, requestUrl)
     var router       = new Router(matcher, urlGenerator)
 
-Initialization of the controller:
+Initialization of the controller*:
 
     var controller = router.getRoute().getController()
     // @some/module/BlogController
