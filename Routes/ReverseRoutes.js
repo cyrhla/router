@@ -95,7 +95,7 @@ module.exports = class ReverseRoutes
             var value = rawRoutes[key]
             var temp = 'routes' in value ? value['routes'] : []
 
-            for (let [i, val] of temp.entries()) {
+            for (let val of temp) {
                 var fragRoute = val.split('/')
                 var fragLen = fragRoute.length
                 var activeRouteRegexPath = []
