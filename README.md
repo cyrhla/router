@@ -40,7 +40,7 @@ Simple example*:
                 '/',
                 '/:lang({lang})'
             ],
-            initialize: '@some/module/HomeController::homeAction'
+            initialize: '@some/module/HomeController::indexAction'
         },
         blog: {
             routes: [
