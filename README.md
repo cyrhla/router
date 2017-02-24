@@ -40,14 +40,14 @@ Simple example*:
                 '/',
                 '/:lang({lang})'
             ],
-            initialize: '@some/module/HomeController::indexAction'
+            initialize: '@some/module/Controller/HomeController::indexAction'
         },
         blog: {
             routes: [
                 '/:controller(blog)',
                 '/:lang({lang})/:controller(blog)'
             ],
-            initialize: '@some/module/BlogController::indexAction'
+            initialize: '@some/module/Controller/BlogController::indexAction'
         }
     }
 
@@ -59,7 +59,7 @@ Simple example*:
 Initialization of the controller*:
 
     var controller = router.getRoute().getController()
-    // @some/module/BlogController
+    // @some/module/Controller/BlogController
 
     var action = router.getRoute().getAction()
     // indexAction
