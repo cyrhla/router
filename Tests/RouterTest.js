@@ -151,9 +151,6 @@ module.exports = class RouterTest extends Tester
         this.expectError('InvalidTypeError', function() {
             router.getUrl(/^/)
         })
-        this.expectError('InvalidTypeError', function() {
-            router.getUrl([])
-        })
 
         // Invalid entities.
         this.expectError('InvalidTypeError', function() {
