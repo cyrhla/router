@@ -199,6 +199,10 @@ module.exports = class MatcherTest extends Tester
         var matcher = new Matcher(routes, 'POST', '/en/żółć/abc/')
         this.assertSame('/([a-zA-Z]{2,3}(-[a-zA-Z0-9]{1,8})*)+/żółć/[a-zA-Z0-9_-]+/', matcher.getRoute().getActiveRegex())
         this.assertSame('/:lang({lang})/:controller(żółć)/:some({example})/', matcher.getRoute().getActiveRoute())
+
+        var matcher = new Matcher(routes, 'POST', 'http://www.example.com/en/żółć/abc/')
+        this.assertSame('/([a-zA-Z]{2,3}(-[a-zA-Z0-9]{1,8})*)+/żółć/[a-zA-Z0-9_-]+/', matcher.getRoute().getActiveRegex())
+        this.assertSame('/:lang({lang})/:controller(żółć)/:some({example})/', matcher.getRoute().getActiveRoute())
     }
 
     test_matcherArgumentInvalidTypeError()
@@ -359,4 +363,3 @@ module.exports = class MatcherTest extends Tester
         this.assertSame(obj, matcher._extractRouteParams('/:lang({lang})/:controller(żółć)/:some({example})/'))
     }
 }
-
