@@ -50,17 +50,16 @@ module.exports = class Router
     /**
      * Gets the URL.
      *
-     * @param object  urlObj
-     * @param boolean entities Default true
+     * @param array|object urlObj   Default empty object
+     * @param boolean      entities Default true
      *
      * @return string
      */
     getUrl(urlObj = {}, entities = true)
     {
-        valid(urlObj, 'object')
+        valid(urlObj, 'array', 'object')
         valid(entities, 'boolean')
 
         return this._urlGenerator.getUrl(urlObj, entities)
     }
 }
-
