@@ -21,7 +21,7 @@ module.exports = class RoutesTest extends Tester
     {
         return {
             routing1: {
-                '@legend': {
+                '__legend': {
                     regex: {
                         '{example}': '[0-9a-zA-Z_-]+'
                     }

@@ -61,7 +61,7 @@ module.exports = class CheckRoutes
         for (let key in rawRoutes) {
             var value = rawRoutes[key]
 
-            if (key !== '@legend') {
+            if (key !== '__legend') {
 
                 if (('routes' in value) === false) {
                     throw new RoutesKeyReferenceError('@param rawRoutes, routes does not exist, see routing "' + key + '".')
@@ -91,12 +91,12 @@ module.exports = class CheckRoutes
                 if (!req.toString().match(action + '(.*?)')) {
                     throw new ActionKeyReferenceError('@param action, ' + action + ' does not exist, see routing "' + key + '".')
                 }
-            } else if (key === '@legend') {
+            } else if (key === '__legend') {
                 if ('regex' in value) {
                     for (let k in value['regex']) {
                         var v = value['regex'][k]
                         if (!k.match(/^{(.+?)}$/)) {
-                            throw new RegexKeySyntaxError('@param rawRoutes, ' + k + ' is not a valid key, see @legend regex "' + k + '".')
+                            throw new RegexKeySyntaxError('@param rawRoutes, ' + k + ' is not a valid key, see __legend regex "' + k + '".')
                         }
                     }
                 }

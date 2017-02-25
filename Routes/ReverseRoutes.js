@@ -35,11 +35,11 @@ module.exports = class ReverseRoutes
         this._keySuffix = keySuffix
 
         var legendRegex = {}
-        if ('@legend' in rawRoutes && 'regex' in rawRoutes['@legend']) {
-            legendRegex = rawRoutes['@legend'].regex
+        if ('__legend' in rawRoutes && 'regex' in rawRoutes['__legend']) {
+            legendRegex = rawRoutes['__legend'].regex
         }
 
-        delete rawRoutes['@legend']
+        delete rawRoutes['__legend']
 
         this._data = this._reverse(rawRoutes, legendRegex)
     }

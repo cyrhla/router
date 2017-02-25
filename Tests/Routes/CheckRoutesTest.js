@@ -21,7 +21,7 @@ module.exports = class CheckRoutesTest extends Tester
     {
         return {
             routing1: {
-                '@legend': {
+                '__legend': {
                     regex: {
                         '{example}': '[0-9a-zA-Z_-]+'
                     }
@@ -95,7 +95,7 @@ module.exports = class CheckRoutesTest extends Tester
                 }
             },
             routing7: {
-                '@legend': {
+                '__legend': {
                     regex: {
                         'example}': '[0-9a-zA-Z_-]+'
                     }

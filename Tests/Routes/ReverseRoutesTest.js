@@ -21,7 +21,7 @@ module.exports = class ReverseRoutesTest extends Tester
     {
         return {
             routing: {
-                '@legend': {
+                '__legend': {
                     regex: {
                         '{example}': '[0-9a-zA-Z_-]+'
                     }
