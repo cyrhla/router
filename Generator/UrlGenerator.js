@@ -7,6 +7,7 @@
 
 'use strict'
 
+const is    = require('@cyrhla/tester/is')
 const valid = require('@cyrhla/tester/valid')
 
 /**
@@ -31,7 +32,7 @@ module.exports = class UrlGenerator
     constructor(
         requestDomain,
         requestUrl,
-        scheme        = null,
+        protocol      = null,
         www           = true,
         absoluteUrl   = true,
         nickSubdomain = true,
@@ -40,7 +41,7 @@ module.exports = class UrlGenerator
     ) {
         valid(requestDomain, 'string')
         valid(requestUrl, 'string')
-        valid(scheme, 'null', 'string')
+        valid(protocol, 'null', 'string')
         valid(www, 'boolean')
         valid(absoluteUrl, 'boolean')
         valid(nickSubdomain, 'boolean')
@@ -48,41 +49,41 @@ module.exports = class UrlGenerator
         valid(lastShlash, 'boolean')
 
         /** @type string */
-        this.requestDomain = requestDomain
+        this._requestDomain = requestDomain
 
         /** @type string */
         this.requestUrl = requestUrl
 
         /** @type null|string */
-        this.scheme = scheme !== null ? scheme + ':' : ''
+        this._protocol = protocol !== null ? protocol + ':' : ''
 
         /** @type boolean */
-        this.www = www === true ? 'www.' : ''
+        this._www = www === true ? 'www.' : ''
 
         /** @type boolean */
-        this.absoluteUrl = absoluteUrl
+        this._absoluteUrl = absoluteUrl
 
         /** @type boolean */
-        this.nickSubdomain = nickSubdomain
+        this._nickSubdomain = nickSubdomain
 
         /** @type null|string */
-        this.indexDev = indexDev !== null ? '/' + indexDev : ''
+        this._indexDev = indexDev !== null ? '/' + indexDev : ''
 
         /** @type boolean */
-        this.lastShlash = lastShlash
+        this._lastShlash = lastShlash
     }
 
     /**
      * Gets the URL.
      *
-     * @param array   urlObj
-     * @param boolean entities Default true
+     * @param array|object urlObj   Default empty object
+     * @param boolean      entities Default true
      *
      * @return string
      */
     getUrl(urlObj = {}, entities = true)
     {
-        valid(urlObj, 'object')
+        valid(urlObj, 'array', 'object')
         valid(entities, 'boolean')
 
         if (Object.keys(urlObj).length === 0) {
@@ -99,30 +100,40 @@ module.exports = class UrlGenerator
         var query   = []
         for (let key in urlObj) {
             var value = urlObj[key]
-            if (key === 'nick' && this.nickSubdomain === true) {
+            if (is(value, 'object')) {
+                if ('nick' in value && this._nickSubdomain === true) {
+                    nick = value['nick']
+                } else {
+                    continue
+                }
+            } else if (key === 'nick' && this._nickSubdomain === true) {
                 nick = value
             } else if (key === '?') {
                 qstring = value
+            } else if (value.charAt(0) === '?') {
+                qstring = value.substr(1)
             } else if (key === '#') {
                 anchor = '#' + value
+            } else if (value.charAt(0) === '#') {
+                anchor = value
             } else {
                 query.push(value)
             }
         }
 
         qstring = qstring ? '?' + qstring : ''
-        var shlash = this.lastShlash === true ? '/' : ''
+        var shlash = this._lastShlash === true ? '/' : ''
         var path = query.join('/') + shlash
 
         var part
-        if (this.absoluteUrl === true) {
-            if (nick && this.nickSubdomain === true) {
-                part = this.scheme + '//' + this.www + nick + '.' + this.requestDomain + this.indexDev
+        if (this._absoluteUrl === true) {
+            if (nick && this._nickSubdomain === true) {
+                part = this._protocol + '//' + this._www + nick + '.' + this._requestDomain + this._indexDev
             } else {
-                part = this.scheme + '//' + this.www + this.requestDomain + this.indexDev
+                part = this._protocol + '//' + this._www + this._requestDomain + this._indexDev
             }
         } else {
-            part = this.indexDev
+            part = this._indexDev
         }
 
         var url = part + '/' + path + qstring + anchor
@@ -148,4 +159,3 @@ module.exports = class UrlGenerator
         return str.replace(/&/g, '&amp;')
     }
 }
-
