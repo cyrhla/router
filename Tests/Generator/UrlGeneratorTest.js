@@ -323,6 +323,69 @@ module.exports = class UrlGeneratorTest extends Tester
         })
     }
 
+    testGetUrlArgumentInvalidTypeError()
+    {
+        var urlGenerator = new UrlGenerator(
+            'example.com',
+            'http://www.example.com/controller/action?foo=bar&baz=1#top',
+            'https',
+            true,
+            true,
+            true,
+            'index_dev.js',
+            false
+        )
+
+        // Invalid urlObj.
+        this.expectError('InvalidTypeError', function() {
+            urlGenerator.getUrl('')
+        })
+        this.expectError('InvalidTypeError', function() {
+            urlGenerator.getUrl(0)
+        })
+        this.expectError('InvalidTypeError', function() {
+            urlGenerator.getUrl(null)
+        })
+        this.expectError('InvalidTypeError', function() {
+            urlGenerator.getUrl(false)
+        })
+        this.expectError('InvalidTypeError', function() {
+            urlGenerator.getUrl(Object)
+        })
+        this.expectError('InvalidTypeError', function() {
+            urlGenerator.getUrl(Symbol('foo'))
+        })
+        this.expectError('InvalidTypeError', function() {
+            urlGenerator.getUrl(/^/)
+        })
+
+        // Invalid entities.
+        this.expectError('InvalidTypeError', function() {
+            urlGenerator.getUrl({}, '')
+        })
+        this.expectError('InvalidTypeError', function() {
+            urlGenerator.getUrl({}, 0)
+        })
+        this.expectError('InvalidTypeError', function() {
+            urlGenerator.getUrl({}, null)
+        })
+        this.expectError('InvalidTypeError', function() {
+            urlGenerator.getUrl({}, Object())
+        })
+        this.expectError('InvalidTypeError', function() {
+            urlGenerator.getUrl({}, new Object())
+        })
+        this.expectError('InvalidTypeError', function() {
+            urlGenerator.getUrl({}, Symbol('foo'))
+        })
+        this.expectError('InvalidTypeError', function() {
+            urlGenerator.getUrl({}, /^/)
+        })
+        this.expectError('InvalidTypeError', function() {
+            urlGenerator.getUrl({}, [])
+        })
+    }
+
     testGetUrlReturnsString()
     {
         var urlGenerator = new UrlGenerator(
@@ -459,4 +522,3 @@ module.exports = class UrlGeneratorTest extends Tester
         this.assertSame('a&amp;b&amp;żółć &amp; ', urlGenerator._toEntities('a&b&żółć & '))
     }
 }
-
