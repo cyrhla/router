@@ -7,6 +7,7 @@
 
 'use strict'
 
+const Url    = require('url').URL
 const is     = require('@cyrhla/tester/is')
 const valid  = require('@cyrhla/tester/valid')
 const Routes = require('@cyrhla/router/Routes/Routes')
@@ -30,7 +31,7 @@ module.exports = class Matcher
     {
         valid(routes, Routes)
         valid(requestMethod, 'string')
-        valid(requestUrl, 'string')
+        valid(requestUrl, Url, 'string')
 
         /** @type Routes */
         this._routes = routes
@@ -38,11 +39,15 @@ module.exports = class Matcher
         /** @type string */
         this._requestMethod = requestMethod
 
+        try {
+            requestUrl = new Url(requestUrl).pathname
+        } catch(error) {}
+
         /** @type string */
-        this._requestUrl = requestUrl
+        this._requestPath = requestUrl
 
         /** @type array */
-        this._requestUrlArr = requestUrl.split('/')
+        this._requestPathArr = this._requestPath.split('/')
     }
 
     /**
@@ -52,7 +57,7 @@ module.exports = class Matcher
      */
     getRoute()
     {
-        var requestLen = this._requestUrlArr.length
+        var requestLen = this._requestPathArr.length
 
         var key = requestLen + this._routes.getKeySuffix()
 
@@ -76,7 +81,7 @@ module.exports = class Matcher
 
         for (let key in routesParts) {
             var value = routesParts[key]
-            if (!this._requestUrl.match('^' + key + '$')) {
+            if (!this._requestPath.match('^' + key + '$')) {
                 continue
             }
 
@@ -138,8 +143,8 @@ module.exports = class Matcher
         for (let [i, value] of fragRoute.entries()) {
             var matchParam = value.match(/^:(.+?)\((.+?)\)$/)
             if (matchParam) {
-                if (this._requestUrlArr[i]) {
-                    routeParams[matchParam[1]] = this._requestUrlArr[i]
+                if (this._requestPathArr[i]) {
+                    routeParams[matchParam[1]] = this._requestPathArr[i]
                 }
             }
         }
@@ -147,4 +152,3 @@ module.exports = class Matcher
         return routeParams
     }
 }
-
