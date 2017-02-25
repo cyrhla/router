@@ -119,6 +119,7 @@ module.exports = class ReverseRoutes
 
                 activeRouteRegexPath = activeRouteRegexPath.join('\/')
                 var route = new Route(raw)
+                    .setKey(key)
                     .setActiveRoute(val)
                     .setActiveRegex(activeRouteRegexPath)
 
