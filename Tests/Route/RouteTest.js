@@ -88,6 +88,57 @@ module.exports = class RouteTest extends Tester
         this.assertSame('{}', route.toString())
     }
 
+    testSetKeyArgumentInvalidTypeError()
+    {
+        var route = new Route()
+
+        // Invalid key.
+        this.expectError('InvalidTypeError', function() {
+            route.setKey(0)
+        })
+        this.expectError('InvalidTypeError', function() {
+            route.setKey(null)
+        })
+        this.expectError('InvalidTypeError', function() {
+            route.setKey(false)
+        })
+        this.expectError('InvalidTypeError', function() {
+            route.setKey(Object)
+        })
+        this.expectError('InvalidTypeError', function() {
+            route.setKey(new Object())
+        })
+        this.expectError('InvalidTypeError', function() {
+            route.setKey(Symbol('foo'))
+        })
+        this.expectError('InvalidTypeError', function() {
+            route.setKey(/^/)
+        })
+        this.expectError('InvalidTypeError', function() {
+            route.setKey([])
+        })
+        this.expectError('InvalidTypeError', function() {
+            route.setKey(undefined)
+        })
+    }
+
+    testSetKeyReturnsSelf()
+    {
+        var route = new Route()
+
+        this.assertInstanceOf(Route, route.setKey(''))
+    }
+
+    testGetKeyReturnsNullOrString()
+    {
+        var route = new Route()
+
+        this.assertSame(null, route.getKey())
+
+        route.setKey('home')
+        this.assertSame('home', route.getKey())
+    }
+
     testSetParamsArgumentInvalidTypeError()
     {
         var route = new Route()
@@ -530,4 +581,3 @@ module.exports = class RouteTest extends Tester
         this.assertSame(obj, route.all())
     }
 }
-
