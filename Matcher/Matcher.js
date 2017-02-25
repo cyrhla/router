@@ -31,7 +31,7 @@ module.exports = class Matcher
     {
         valid(routes, Routes)
         valid(requestMethod, 'string')
-        valid(requestUrl, Url, 'string')
+        valid(requestUrl, 'string')
 
         /** @type Routes */
         this._routes = routes
@@ -40,7 +40,7 @@ module.exports = class Matcher
         this._requestMethod = requestMethod
 
         try {
-            requestUrl = new Url(requestUrl).pathname
+            requestUrl = decodeURIComponent(new Url(requestUrl).pathname)
         } catch(error) {}
 
         /** @type string */
