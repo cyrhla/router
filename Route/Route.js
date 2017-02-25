@@ -40,6 +40,36 @@ module.exports = class Route
     }
 
     /**
+     * Sets the key.
+     *
+     * @param string key
+     *
+     * @return self The invoked object.
+     */
+    setKey(key)
+    {
+        valid(key, 'string')
+
+        this._route['key'] = key
+
+        return this
+    }
+
+    /**
+     * Gets the key.
+     *
+     * @return null|string
+     */
+    getKey()
+    {
+        if (('key' in this._route) === false) {
+            return null
+        }
+
+        return this._route['key']
+    }
+
+    /**
      * Sets the params.
      *
      * @param object params
@@ -325,4 +355,3 @@ module.exports = class Route
         return this._route
     }
 }
-
