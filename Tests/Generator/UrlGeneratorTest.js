@@ -35,53 +35,6 @@ module.exports = class UrlGeneratorTest extends Tester
 
     testContructorArgumentInvalidTypeError()
     {
-        // Invalid requestDomain.
-        this.expectError('InvalidTypeError', function() {
-            var urlGenerator = new UrlGenerator(
-                0, 'http://www.example.com/controller/action', 'https', true, true, true, 'index_dev.js', false
-            )
-        })
-        this.expectError('InvalidTypeError', function() {
-            var urlGenerator = new UrlGenerator(
-                null, 'http://www.example.com/controller/action', 'https', true, true, true, 'index_dev.js', false
-            )
-        })
-        this.expectError('InvalidTypeError', function() {
-            var urlGenerator = new UrlGenerator(
-                false, 'http://www.example.com/controller/action', 'https', true, true, true, 'index_dev.js', false
-            )
-        })
-        this.expectError('InvalidTypeError', function() {
-            var urlGenerator = new UrlGenerator(
-                Object, 'http://www.example.com/controller/action', 'https', true, true, true, 'index_dev.js', false
-            )
-        })
-        this.expectError('InvalidTypeError', function() {
-            var urlGenerator = new UrlGenerator(
-                new Object(), 'http://www.example.com/controller/action', 'https', true, true, true, 'index_dev.js', false
-            )
-        })
-        this.expectError('InvalidTypeError', function() {
-            var urlGenerator = new UrlGenerator(
-                Symbol('foo'), 'http://www.example.com/controller/action', 'https', true, true, true, 'index_dev.js', false
-            )
-        })
-        this.expectError('InvalidTypeError', function() {
-            var urlGenerator = new UrlGenerator(
-                /^/, 'http://www.example.com/controller/action', 'https', true, true, true, 'index_dev.js', false
-            )
-        })
-        this.expectError('InvalidTypeError', function() {
-            var urlGenerator = new UrlGenerator(
-                [], 'http://www.example.com/controller/action', 'https', true, true, true, 'index_dev.js', false
-            )
-        })
-        this.expectError('InvalidTypeError', function() {
-            var urlGenerator = new UrlGenerator(
-                undefined, 'http://www.example.com/controller/action', 'https', true, true, true, 'index_dev.js', false
-            )
-        })
-
         // Invalid requestUrl.
         this.expectError('InvalidTypeError', function() {
             var urlGenerator = new UrlGenerator(
@@ -384,6 +337,7 @@ module.exports = class UrlGeneratorTest extends Tester
         )
         this.assertSame('http://www.example.com/controller/action?foo=bar&amp;baz=1#top', urlGenerator.getUrl())
         this.assertSame('https://www.example.com/index_dev.js/a/b?foo=bar&amp;baz=1#top', urlGenerator.getUrl({ a: 'a', b: 'b', '?': 'foo=bar&baz=1', '#': 'top' }))
+        this.assertSame('https://www.example.com/index_dev.js/a/b?foo=bar&amp;baz=1#top', urlGenerator.getUrl(['a', 'b', '?foo=bar&baz=1', '#top']))
 
         var urlGenerator = new UrlGenerator(
             'example.com',
@@ -396,7 +350,9 @@ module.exports = class UrlGeneratorTest extends Tester
             false
         )
         this.assertSame('//example.com/index_dev.js/a/b?foo=bar&amp;baz=1#top', urlGenerator.getUrl({ a: 'a', b: 'b', '?': 'foo=bar&baz=1', '#': 'top' }))
+        this.assertSame('//example.com/index_dev.js/a/b?foo=bar&amp;baz=1#top', urlGenerator.getUrl(['a', 'b', '?foo=bar&baz=1', '#top']))
         this.assertSame('//akira.example.com/index_dev.js/a?foo=bar&amp;baz=1#top', urlGenerator.getUrl({ a: 'a', nick: 'akira', '?': 'foo=bar&baz=1', '#': 'top' }))
+        this.assertSame('//akira.example.com/index_dev.js/a?foo=bar&amp;baz=1#top', urlGenerator.getUrl(['a', { nick: 'akira' }, '?foo=bar&baz=1', '#top']))
 
         var urlGenerator = new UrlGenerator(
             'example.com',
@@ -415,6 +371,8 @@ module.exports = class UrlGeneratorTest extends Tester
         this.assertSame('/a/b?foo=bar&amp;baz=1', urlGenerator.getUrl({ a: 'a', b: 'b', '?': 'foo=bar&baz=1' }))
         this.assertSame('/a/b#top', urlGenerator.getUrl({ a: 'a', b: 'b', '#': 'top' }))
         this.assertSame('/a/b?foo=bar&amp;baz=1#top', urlGenerator.getUrl({ a: 'a', b: 'b', '?': 'foo=bar&baz=1', '#': 'top' }))
+        this.assertSame('/a/b?foo=bar&amp;baz=1#top', urlGenerator.getUrl(['a', 'b', '?foo=bar&baz=1', '#top']))
+
 
         var urlGenerator = new UrlGenerator(
             'example.com',
@@ -433,6 +391,7 @@ module.exports = class UrlGeneratorTest extends Tester
         this.assertSame('/a/b/?foo=bar&amp;baz=1', urlGenerator.getUrl({ a: 'a', b: 'b', '?': 'foo=bar&baz=1' }))
         this.assertSame('/a/b/#top', urlGenerator.getUrl({ a: 'a', b: 'b', '#': 'top' }))
         this.assertSame('/a/b/?foo=bar&amp;baz=1#top', urlGenerator.getUrl({ a: 'a', b: 'b', '?': 'foo=bar&baz=1', '#': 'top' }))
+        this.assertSame('/a/b/?foo=bar&amp;baz=1#top', urlGenerator.getUrl(['a', 'b', '?foo=bar&baz=1', '#top']))
 
         var urlGenerator = new UrlGenerator(
             'example.com',
@@ -451,6 +410,7 @@ module.exports = class UrlGeneratorTest extends Tester
         this.assertSame('/index_dev.js/a/b/?foo=bar&baz=1', urlGenerator.getUrl({ a: 'a', b: 'b', '?': 'foo=bar&baz=1' }, false))
         this.assertSame('/index_dev.js/a/b/#top', urlGenerator.getUrl({ a: 'a', b: 'b', '#': 'top' }))
         this.assertSame('/index_dev.js/a/b/?foo=bar&baz=1#top', urlGenerator.getUrl({ a: 'a', b: 'b', '?': 'foo=bar&baz=1', '#': 'top' }, false))
+        this.assertSame('/index_dev.js/a/b/?foo=bar&baz=1#top', urlGenerator.getUrl(['a', 'b', '?foo=bar&baz=1', '#top'], false))
     }
 
     test_toEntitiesArgumentInvalidTypeError()
