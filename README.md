@@ -5,17 +5,13 @@ router
 - Version: 0.0.1-dev
 - Technologies:
   - JavaScript
-- Compatibility:
-  - Node (>= 7.2.1)
-  - npm (>= 3.10.10)
-- Dependencies:
-  - see package.json
 - Copyright / Authors:
   - Krystian Pietruszka <kpietru@cyrhla.com>
 - Licenses:
   - MIT <http://spdx.org/licenses/MIT>
 - Download: <http://github.com/cyrhla/router/releases>
 - Homepage: <http://www.cyrhla.com>
+- More: package.json
 
 The "router" converts the URL path to run the appropriate controller and generates the URLs.
 ____________________________________________________________________________________________
