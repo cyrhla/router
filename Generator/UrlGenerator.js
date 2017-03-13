@@ -24,7 +24,7 @@ module.exports = class UrlGenerator
      * @param string      requestUrl
      * @param null|string protocol      Default null
      * @param boolean     www           Default true
-     * @param boolean     absoluteUrl   Default true
+     * @param boolean     absolute      Default true
      * @param boolean     nickSubdomain Default true
      * @param null|string indexDev      Default null
      * @param boolean     lastShlash    Default false
@@ -34,7 +34,7 @@ module.exports = class UrlGenerator
         requestUrl,
         protocol      = null,
         www           = true,
-        absoluteUrl   = true,
+        absolute      = true,
         nickSubdomain = true,
         indexDev      = null,
         lastShlash    = false
@@ -43,7 +43,7 @@ module.exports = class UrlGenerator
         valid(requestUrl, 'string')
         valid(protocol, 'null', 'string')
         valid(www, 'boolean')
-        valid(absoluteUrl, 'boolean')
+        valid(absolute, 'boolean')
         valid(nickSubdomain, 'boolean')
         valid(indexDev, 'null', 'string')
         valid(lastShlash, 'boolean')
@@ -61,7 +61,7 @@ module.exports = class UrlGenerator
         this._www = www === true ? 'www.' : ''
 
         /** @type boolean */
-        this._absoluteUrl = absoluteUrl
+        this._absolute = absolute
 
         /** @type boolean */
         this._nickSubdomain = nickSubdomain
@@ -126,7 +126,7 @@ module.exports = class UrlGenerator
         var path = query.join('/') + shlash
 
         var part
-        if (this._absoluteUrl === true) {
+        if (this._absolute === true) {
             if (nick && this._nickSubdomain === true) {
                 part = this._protocol + '//' + this._www + nick + '.' + this._requestDomain + this._indexDev
             } else {
