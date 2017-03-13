@@ -61,7 +61,7 @@ Initialization of the controller*:
     // indexAction
 
     controller = new (require(controller))()
-    controller[action].apply(controller[action], {})
+    controller[action].apply(controller[action], [])
 
 Generating URLs*:
 
