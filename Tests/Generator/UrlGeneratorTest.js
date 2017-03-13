@@ -161,7 +161,7 @@ module.exports = class UrlGeneratorTest extends Tester
             )
         })
 
-        // Invalid absoluteUrl.
+        // Invalid absolute.
         this.expectError('InvalidTypeError', function() {
             var urlGenerator = new UrlGenerator(
                 'example.com', 'http://www.example.com/controller/action', 'https', true, '', true, 'index_dev.js', false
