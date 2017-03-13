@@ -22,7 +22,7 @@ module.exports = class UrlGenerator
      *
      * @param string      requestDomain
      * @param string      requestUrl
-     * @param null|string scheme        Default null
+     * @param null|string protocol      Default null
      * @param boolean     www           Default true
      * @param boolean     absoluteUrl   Default true
      * @param boolean     nickSubdomain Default true
