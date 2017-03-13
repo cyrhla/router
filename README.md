@@ -68,7 +68,7 @@ Generating URLs*:
     router.getUrl()
     // http://www.example.com/blog?foo=bar
 
-    router.getUrl(['someController', 'someAction', { '?': 'a=b', '#': 'top' }])
+    router.getUrl(['someController', 'someAction', '?a=b', '#top'])
     // /someController/someAction?a=b#top
 
     router.getUrl({ controller: 'someController', action: 'someAction', '?': 'a=b', '#': 'top' })
