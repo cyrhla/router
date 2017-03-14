@@ -25,7 +25,7 @@ module.exports = class Matcher
      *
      * @param Routes routes
      * @param string requestMethod
-     * @param string requestUrl
+     * @param string requestUrl    Only path or full url.
      */
     constructor(routes, requestMethod, requestUrl)
     {
